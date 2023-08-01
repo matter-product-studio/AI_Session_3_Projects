@@ -1,0 +1,48 @@
+ /*body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      margin: 50px;
+      background: url('https://example.com/cute-image.jpg') repeat;
+    }*/
+
+    body {
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        background: url('https://lh3.googleusercontent.com/bip/APOwr82y-DKrq2rDNZzHjZLUesflMKFuY04asM1H2VPAm5g5hOoOshPLpApPVHtQgm9ILTEmJEWhf16194yBBjdGSQ2nUkQqxewq0fsbVCBQUbmLfXVT7DZNmSv7_PcKTIFqrVyLc6CQtyTPONeKqnlG5AY=w250-h200-p') repeat;
+      }
+  
+      h1 {
+        color: #ff69b4;
+        font-size: 36px;
+      }
+  
+      button {
+        background-color: #ff69b4;
+        color: white;
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+  
+      button:hover {
+        background-color: #ff3399;
+      }
+  
+      #playlistContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 200px;
+      }
+  
+      iframe {
+        border: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }

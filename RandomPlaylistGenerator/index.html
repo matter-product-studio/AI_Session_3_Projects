@@ -1,0 +1,69 @@
+<h1>Random Playlist Generator</h1>
+  <button onclick="getRandomPlaylist()">Get Random Playlist</button>
+  <div id="playlistContainer"></div>
+
+  <script>
+    async function getAccessToken() {
+      const clientId = "c3cb5304ae6a4737a47f9bf2e902d047";
+      const clientSecret = "5d0fffccae5e48bfa6b3b435fb39a120";
+
+      const url = "https://accounts.spotify.com/api/token";
+
+      const data = {
+        "grant_type": "client_credentials",
+      };
+
+      const headers = {
+        "Authorization": "Basic " + btoa(clientId + ":" + clientSecret),
+        "Content-Type": "application/x-www-form-urlencoded",
+      };
+
+      const response = await fetch(url, {
+        method: "POST",
+        body: new URLSearchParams(data),
+        headers: headers,
+      });
+
+      const responseData = await response.json();
+      const access_token = responseData.access_token;
+
+      return access_token;
+    }
+
+    // Spotify client ID (Note: In a production environment, this should be handled server-side)
+    const clientId = "c3cb5304ae6a4737a47f9bf2e902d047";
+
+    // Spotify API endpoint to get a list of featured playlists
+    const playlistEndpoint = "https://api.spotify.com/v1/browse/featured-playlists";
+
+    async function getRandomPlaylist() {
+      const accessToken = await getAccessToken();
+      const playlistContainer = document.getElementById("playlistContainer");
+
+      try {
+        // Make a request to the Spotify API to get a list of featured playlists
+        const responsePlaylists = await fetch(`${playlistEndpoint}?limit=50`, {
+          headers: {
+            "Authorization": `Bearer ${accessToken}`
+          }
+        });
+
+        const dataPlaylists = await responsePlaylists.json();
+
+        // Randomly select a playlist from the response
+        const randomIndex = Math.floor(Math.random() * dataPlaylists.playlists.items.length);
+        const randomPlaylist = dataPlaylists.playlists.items[randomIndex];
+
+        if (randomPlaylist) {
+          const playlistId = randomPlaylist.id;
+          const iframeHtml = `<iframe src="https://open.spotify.com/embed/playlist/${playlistId}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+          playlistContainer.innerHTML = iframeHtml;
+        } else {
+          playlistContainer.innerHTML = "<p>No playlist found.</p>";
+        }
+      } catch (error) {
+        playlistContainer.innerHTML = "<p>An error occurred while fetching data.</p>";
+        console.error(error);
+      }
+    }
+  </script>
