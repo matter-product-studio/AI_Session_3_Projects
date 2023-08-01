@@ -1,0 +1,17 @@
+body {
+  width: 300px;
+  padding: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+div#clipboardItems {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+div#clipboardItems > div {
+  margin-bottom: 5px;
+}
